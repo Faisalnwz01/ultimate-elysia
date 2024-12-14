@@ -1,12 +1,27 @@
 {
-  "name": "starter",
-  "version": "1.0.50",
+  "name": "@faisalnawaz/ultimate-elysia",
+  "version": "1.0.0",
+  "description": "A modern Bun + Elysia starter template with Prisma, Swagger, OpenTelemetry, and more",
+  "author": "Faisal Nawaz",
+  "license": "MIT",
+  "keywords": [
+    "bun",
+    "elysia",
+    "starter",
+    "template",
+    "prisma",
+    "swagger",
+    "opentelemetry",
+    "typescript"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "setup": "bun install && bun run prisma:generate"
   },
   "dependencies": {
     "@bogeychan/elysia-logger": "^0.1.4",

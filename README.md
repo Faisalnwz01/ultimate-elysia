@@ -20,76 +20,108 @@ A powerful, production-ready starter template built with Bun and Elysia, featuri
 - A PostgreSQL database (for Prisma)
 - Node.js 18+ (recommended)
 
-## 🛠️ Getting Started
+## 🛠️ Quick Start
 
-1. **Clone the repository**
+### Using as a Template
+
+1. **Create a new project using this template**
    ```bash
-   git clone [your-repo-url]
-   cd starter
+   bun create github:faisalnawaz/ultimate-elysia my-app
+   cd my-app
    ```
 
-2. **Install dependencies**
+2. **Install dependencies and set up the project**
    ```bash
-   bun install
+   bun run setup
    ```
 
 3. **Environment Setup**
-   Copy the `.env.example` file to `.env` and update the variables:
    ```bash
    cp .env.example .env
    ```
-   Required environment variables:
-   - `DATABASE_URL`: Your PostgreSQL connection string
-   - `STRIPE_SECRET_KEY`: Your Stripe secret key
-   - Other auth-related variables as needed
-
-4. **Database Setup**
-   ```bash
-   # Generate Prisma client
-   bun run prisma:generate
-
-   # Push database schema
-   bun run prisma:push
+   Update the `.env` file with your configuration:
+   ```env
+   DATABASE_URL="postgresql://user:password@localhost:5432/dbname"
+   STRIPE_SECRET_KEY="your-stripe-key"
    ```
 
-## 💻 Development
+4. **Start the development server**
+   ```bash
+   bun run dev
+   ```
 
-Start the development server with hot reload:
-```bash
-bun run dev
-```
+Your server will be running at `http://localhost:3000` with Swagger docs at `/swagger`
 
-The server will start at `http://localhost:3000`
+### Manual Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/faisalnawaz/bun-elysia-starter.git
+   cd bun-elysia-starter
+   ```
+
+2. Follow steps 2-4 from the Quick Start section above.
+
+## 📚 Documentation
 
 ### Available Scripts
 
 - `bun run dev` - Start development server with hot reload
+- `bun run start` - Start production server
+- `bun run setup` - Install dependencies and generate Prisma client
 - `bun run prisma:generate` - Generate Prisma client
 - `bun run prisma:push` - Push database schema changes
 - `bun run prisma:studio` - Open Prisma Studio for database management
 
-## 📚 API Documentation
-
-Once the server is running, access the Swagger documentation at:
-```
-http://localhost:3000/swagger
-```
-
-## 🏗️ Project Structure
+### Project Structure
 
 ```
-src/
-├── index.ts          # Application entry point
-├── routes/           # API routes
-├── controllers/      # Request handlers and business logic controllers
-├── middleware/       # Custom middleware
-├── services/         # Business logic and data access services
-├── types/           # TypeScript type definitions
-└── utils/           # Helper functions
-
-prisma/
-├── schema.prisma    # Database schema
+├── src/
+│   ├── index.ts          # Application entry point
+│   ├── routes/           # API routes
+│   ├── controllers/      # Request handlers
+│   ├── middleware/       # Custom middleware
+│   ├── services/         # Business logic
+│   ├── types/           # TypeScript types
+│   └── utils/           # Helper functions
+├── prisma/
+│   └── schema.prisma    # Database schema
+├── .env.example         # Example environment variables
+├── package.json         # Project configuration
+└── tsconfig.json        # TypeScript configuration
 ```
+
+### API Documentation
+
+Once the server is running, visit:
+- Swagger UI: `http://localhost:3000/swagger`
+- API endpoint: `http://localhost:3000/api`
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Bun](https://bun.sh) - For the amazing runtime
+- [Elysia](https://elysiajs.com) - For the fantastic web framework
+- All other open-source contributors
+
+## 🔒 Authentication
+
+The template uses `better-auth` for authentication. Configure your auth settings in the environment variables.
+
+## 💳 Stripe Integration
+
+Stripe is pre-configured for payment processing. Set your Stripe secret key in the `.env` file to get started.
+
+## 📊 Monitoring
+
+OpenTelemetry is configured for monitoring and observability. Configure your preferred metrics collector in the environment variables.
 
 ## 📝 Adding New Controllers
 
@@ -289,34 +321,3 @@ export class ProtectedController {
     );
 }
 ```
-
-## 🔒 Authentication
-
-The template uses `better-auth` for authentication. Configure your auth settings in the environment variables.
-
-## 💳 Stripe Integration
-
-Stripe is pre-configured for payment processing. Set your Stripe secret key in the `.env` file to get started.
-
-## 📊 Monitoring
-
-OpenTelemetry is configured for monitoring and observability. Configure your preferred metrics collector in the environment variables.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 Support
-
-For support, please open an issue in the GitHub repository or contact the maintainers.
-
-## 🙏 Acknowledgments
-
-- [Bun](https://bun.sh)
-- [Elysia.js](https://elysiajs.com)
-- [Prisma](https://prisma.io)
-- All other amazing open source contributors

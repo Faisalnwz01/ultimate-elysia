@@ -26,7 +26,7 @@ A powerful, production-ready starter template built with Bun and Elysia, featuri
 
 1. **Create a new project using this template**
    ```bash
-   bun create github:faisalnawaz/ultimate-elysia my-app
+   bun create github:faisalnwz01/ultimate-elysia my-app
    cd my-app
    ```
 
@@ -56,7 +56,7 @@ Your server will be running at `http://localhost:3000` with Swagger docs at `/sw
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/faisalnawaz/bun-elysia-starter.git
+   git clone https://github.com/faisalnwz01/bun-elysia-starter.git
    cd bun-elysia-starter
    ```
 

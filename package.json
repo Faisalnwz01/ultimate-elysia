@@ -9,6 +9,7 @@
     "prisma:studio": "prisma studio"
   },
   "dependencies": {
+    "@bogeychan/elysia-logger": "^0.1.4",
     "@elysiajs/cors": "^1.1.1",
     "@elysiajs/opentelemetry": "^1.1.7",
     "@elysiajs/swagger": "^1.1.6",
@@ -16,6 +17,8 @@
     "@types/stripe": "^8.0.417",
     "better-auth": "^1.0.20",
     "elysia": "1.1.26",
+    "pino": "^9.5.0",
+    "pino-pretty": "^13.0.0",
     "stripe": "^17.4.0"
   },
   "devDependencies": {

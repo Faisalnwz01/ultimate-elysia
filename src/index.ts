@@ -7,13 +7,24 @@ import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-node'
 import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-proto'
 import { jobController } from "./app/controllers/job.controller";
 import { paymentController } from "./app/controllers/payment.controller";
+import { logger } from "@bogeychan/elysia-logger";
+
 const port = process.env.PORT || 3000;
 
 const app = new Elysia()
 	.use(cors())
 	.use(swagger())
+	.use(
+		logger({
+			level: "error",
+		})
+	)
 	.all("/api/auth/*", betterAuthView)
-	.get("/", () => "Hello starter")
+	.get("/", (ctx) => {
+		ctx.log.error(ctx, "Context");
+		ctx.log.info(ctx.request, "Request"); // noop
+		return "Hello starter";
+	})
 	.state('version', 1)
 	.decorate('getDate', () => Date.now())
 	.use(

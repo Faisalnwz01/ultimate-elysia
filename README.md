@@ -26,7 +26,7 @@ A powerful, production-ready starter template built with Bun and Elysia, featuri
 
 1. **Create a new project using this template**
    ```bash
-   bun create github:faisalnwz01/ultimate-elysia my-app
+   bun create github.com/faisalnwz01/ultimate-elysia my-app
    cd my-app
    ```
 

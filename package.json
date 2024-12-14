@@ -13,8 +13,10 @@
     "@elysiajs/opentelemetry": "^1.1.7",
     "@elysiajs/swagger": "^1.1.6",
     "@prisma/client": "6.0.1",
+    "@types/stripe": "^8.0.417",
     "better-auth": "^1.0.20",
-    "elysia": "1.1.26"
+    "elysia": "1.1.26",
+    "stripe": "^17.4.0"
   },
   "devDependencies": {
     "bun-types": "latest",

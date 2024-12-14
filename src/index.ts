@@ -16,7 +16,7 @@ const app = new Elysia()
 	.get("/", () => "Hello starter")
 	.state('version', 1)
 	.decorate('getDate', () => Date.now())
-.use(
+	.use(
 		opentelemetry({
 			spanProcessors: [
 				new BatchSpanProcessor(

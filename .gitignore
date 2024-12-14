@@ -45,3 +45,5 @@ package-lock.json
 prisma/*.db
 prisma/*.db-journal
 .env
+
+server

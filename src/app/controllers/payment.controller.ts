@@ -1,16 +1,16 @@
 import { Elysia, t } from 'elysia';
-import { createCustomer, createPaymentIntent, createSubscription } from '../lib/stripe/stripe-utils';
+import { createCustomer, createPaymentIntent, createSubscription } from '../../lib/stripe/stripe-utils';
 import type { User as AuthUser, Session } from 'better-auth/types';
 import type { Stripe } from 'stripe';
-import { userMiddleware } from '../lib/middleware/auth-middleware';
-import { prisma } from '../lib/prisma';
+import { userMiddleware } from '../../lib/middleware/auth-middleware';
+import { prisma } from '../../lib/prisma';
 
 interface User extends AuthUser {
   stripeCustomerId?: string;
 }
 
 
-export const paymentRoutes = new Elysia({ prefix: '/api/payments' })
+export const paymentController = new Elysia({ prefix: '/api/payments' })
   .derive(async (context) => {
     const auth = await userMiddleware(context);
     return { store: { user: auth.user as User, session: auth.session } };

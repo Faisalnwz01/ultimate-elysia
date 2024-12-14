@@ -4,11 +4,11 @@ import type { User as AuthUser, Session } from 'better-auth/types';
 import type { Stripe } from 'stripe';
 import { userMiddleware } from '../../lib/middleware/auth-middleware';
 import { prisma } from '../../lib/prisma';
+import { stripeEnabled } from '../../lib/stripe/stripe-config';
 
 interface User extends AuthUser {
   stripeCustomerId?: string;
 }
-
 
 export const paymentController = new Elysia({ prefix: '/api/payments' })
   .derive(async (context) => {
@@ -17,6 +17,13 @@ export const paymentController = new Elysia({ prefix: '/api/payments' })
   })
   .post('/create-payment-intent',
     async ({ body, store: { user } }) => {
+      if (!stripeEnabled) {
+        return {
+          success: false,
+          error: 'Payments are not configured. Please contact the administrator.'
+        };
+      }
+
       try {
         // Ensure user has a Stripe customer ID
         if (!user.stripeCustomerId) {
@@ -55,6 +62,13 @@ export const paymentController = new Elysia({ prefix: '/api/payments' })
   )
   .post('/create-subscription',
     async ({ body, store: { user } }) => {
+      if (!stripeEnabled) {
+        return {
+          success: false,
+          error: 'Payments are not configured. Please contact the administrator.'
+        };
+      }
+
       try {
         if (!user.email) {
           throw new Error('User email is required');

@@ -1,9 +1,9 @@
 import Stripe from 'stripe';
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('STRIPE_SECRET_KEY must be defined in environment variables');
-}
+export const stripeEnabled = !!process.env.STRIPE_SECRET_KEY;
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2024-11-20.acacia',
-});
+export const stripe = stripeEnabled
+  ? new Stripe(process.env.STRIPE_SECRET_KEY!, {
+      apiVersion: '2024-11-20.acacia',
+    })
+  : null;

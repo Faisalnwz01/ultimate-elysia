@@ -1,4 +1,4 @@
-import { stripe } from './stripe-config';
+import { stripe, stripeEnabled } from './stripe-config';
 import type { Stripe } from 'stripe';
 
 export interface CreatePaymentIntentParams {
@@ -14,12 +14,20 @@ export interface CreateCustomerParams {
   metadata?: Record<string, string>;
 }
 
+function assertStripeEnabled(stripe: Stripe | null): asserts stripe is Stripe {
+  if (!stripeEnabled || !stripe) {
+    throw new Error('Stripe is not configured. Please provide STRIPE_SECRET_KEY in environment variables.');
+  }
+}
+
 export async function createPaymentIntent({
   amount,
   currency,
   customerId,
   metadata
 }: CreatePaymentIntentParams): Promise<Stripe.PaymentIntent> {
+  assertStripeEnabled(stripe);
+
   if (amount <= 0) {
     throw new Error('Amount must be greater than 0');
   }
@@ -40,6 +48,8 @@ export async function createCustomer({
   name,
   metadata
 }: CreateCustomerParams): Promise<Stripe.Customer> {
+  assertStripeEnabled(stripe);
+
   if (!email) {
     throw new Error('Email is required');
   }
@@ -52,6 +62,8 @@ export async function createCustomer({
 }
 
 export async function retrieveCustomer(customerId: string): Promise<Stripe.Customer> {
+  assertStripeEnabled(stripe);
+
   if (!customerId) {
     throw new Error('Customer ID is required');
   }
@@ -68,6 +80,8 @@ export async function createSubscription(
   customerId: string,
   priceId: string
 ): Promise<Stripe.Subscription> {
+  assertStripeEnabled(stripe);
+
   if (!customerId) {
     throw new Error('Customer ID is required');
   }

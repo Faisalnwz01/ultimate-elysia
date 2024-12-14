@@ -2,6 +2,24 @@ FROM oven/bun AS build
 
 WORKDIR /app
 
+# Build arguments
+ARG NODE_ENV=production
+ARG PORT=3000
+ARG DATABASE_URL
+ARG BETTER_AUTH_SECRET
+ARG BETTER_AUTH_URL
+ARG STRIPE_SECRET_KEY
+ARG STRIPE_WEBHOOK_SECRET
+
+# Set build-time environment variables
+ENV NODE_ENV=${NODE_ENV}
+ENV PORT=${PORT}
+ENV DATABASE_URL=${DATABASE_URL}
+ENV BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+ENV BETTER_AUTH_URL=${BETTER_AUTH_URL}
+ENV STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+ENV STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+
 # Cache packages installation
 COPY package.json package.json
 COPY bun.lockb bun.lockb
@@ -9,8 +27,6 @@ COPY bun.lockb bun.lockb
 RUN bun install
 
 COPY ./src ./src
-
-ENV NODE_ENV=production
 
 RUN bun build \
 	--compile \
@@ -24,10 +40,26 @@ FROM gcr.io/distroless/base
 
 WORKDIR /app
 
-COPY --from=build /app/server server
+# Runtime arguments
+ARG NODE_ENV
+ARG PORT
+ARG DATABASE_URL
+ARG BETTER_AUTH_SECRET
+ARG BETTER_AUTH_URL
+ARG STRIPE_SECRET_KEY
+ARG STRIPE_WEBHOOK_SECRET
 
-ENV NODE_ENV=production
+# Set runtime environment variables
+ENV NODE_ENV=${NODE_ENV}
+ENV PORT=${PORT}
+ENV DATABASE_URL=${DATABASE_URL}
+ENV BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+ENV BETTER_AUTH_URL=${BETTER_AUTH_URL}
+ENV STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+ENV STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+
+COPY --from=build /app/server server
 
 CMD ["./server"]
 
-EXPOSE 3000
+EXPOSE ${PORT}

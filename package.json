@@ -12,7 +12,8 @@
     "prisma",
     "swagger",
     "opentelemetry",
-    "typescript"
+    "typescript",
+    "nx"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -47,6 +48,28 @@
     "prisma": "6.0.1",
     "react-email": "^3.0.4",
     "@types/react": "^19.0.1"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile server ./src/index.ts"
+        }
+      },
+      "serve": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "bun run --watch src/index.ts"
+        }
+      },
+      "test": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "echo \"Error: no test specified\" && exit 1"
+        }
+      }
+    }
   },
   "module": "src/index.js"
 }

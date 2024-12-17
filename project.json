@@ -1,0 +1,45 @@
+{
+  "name": "ultimate-elysia",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile server ./src/index.ts"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun run --watch src/index.ts"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "echo \"Error: no test specified\" && exit 1"
+      }
+    },
+    "prisma:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma generate"
+      }
+    },
+    "prisma:push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma db push"
+      }
+    },
+    "prisma:studio": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma studio"
+      }
+    }
+  },
+  "tags": []
+}

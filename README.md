@@ -321,3 +321,35 @@ export class ProtectedController {
     );
 }
 ```
+
+## Using with Nx Monorepo
+
+This starter is compatible with Nx monorepos. To use it in your Nx workspace:
+
+1. Create a new directory in your Nx workspace's `apps` or `packages` directory (depending on your use case)
+2. Copy the contents of this starter into that directory
+3. Add the project to your workspace.json or nx.json:
+   ```json
+   {
+     "projects": {
+       "ultimate-elysia": {
+         "root": "apps/ultimate-elysia",
+         "sourceRoot": "apps/ultimate-elysia/src",
+         "projectType": "application"
+       }
+     }
+   }
+   ```
+4. Run Nx commands:
+   ```bash
+   # Development
+   nx serve ultimate-elysia
+
+   # Build
+   nx build ultimate-elysia
+
+   # Prisma commands
+   nx run ultimate-elysia:prisma:generate
+   nx run ultimate-elysia:prisma:push
+   nx run ultimate-elysia:prisma:studio
+   ```
